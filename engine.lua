@@ -1,18 +1,10 @@
 local object = require "object"
 local tests = require "tests"
 
+local utils = require "utils"
+
 function get_object_at(x, y)
 end
-
-function find_in_array(array, search)
-    for i, item in array do
-        if item == search then
-            return i
-        end
-    end
-    return -1
-end
-
 
 function gets_hit(self, event)
     self.hit_points = self.hit_points - event.obj.damage_mod
@@ -58,7 +50,7 @@ function walks(self, event)
            - direction does not have a collidable object at position
            - is not already moving (jumping, falling, etc)
     --]]
-    if find_in_array(self.collisions, get_object_at(event.x, event.y).collison_type) >= 0 then
+    if utils.find_in_array(self.collisions, get_object_at(event.x, event.y).collison_type) >= 0 then
         self.begin_animation("walk")
         self.x = event.x
         self.y = event.y
@@ -70,7 +62,7 @@ function jumps(self, event)
         the player initiates a jump with the jump button.
         from there the jump will continue until it reaches it jump max
     --]]
-    if find_in_array(self.collisions, get_object_at(event.x, event.y).collison_type) >= 0 then
+    if utils.find_in_array(self.collisions, get_object_at(event.x, event.y).collison_type) >= 0 then
         self.begin_animation("jumps")
         self.x = event.x
         self.y = event.y
@@ -84,7 +76,7 @@ function jumps(self, event)
 end
 
 function falling(self, event)
-    if find_in_array(self.collisions, get_object_at(event.x, event.y).collison_type) >= 0 then
+    if utils.find_in_array(self.collisions, get_object_at(event.x, event.y).collison_type) >= 0 then
         self.begin_animation("falling")
         self.x = event.x
         self.y = event.y
@@ -92,7 +84,7 @@ function falling(self, event)
 end
 
 function super_jumps(self, event)
-    if find_in_array(self.collisions, get_object_at(event.x, event.y).collison_type) >= 0 then
+    if utils.find_in_array(self.collisions, get_object_at(event.x, event.y).collison_type) >= 0 then
         self.begin_animation("super_jumps")
         self.x = event.x
         self.y = event.y
