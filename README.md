@@ -1,6 +1,6 @@
-# SLUGE - Small Lua Unified Game Engine
+# E8Crystal - Small Lua Game Engine for PICO-8
 
-SLUGE is a game engine for the PICO-8 game console. The goal is to write this engine in TDD and allow 
+E8Crystal is a game engine for the PICO-8 game console. The goal is to write this engine in TDD and allow 
 for automated testing, building, and deployment. 
 
 ## Development guide
