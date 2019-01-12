@@ -15,4 +15,4 @@ TBD
 
 ### Run tests
 
- ``make test`` - Runs unit tests
+ ``make tests`` - Runs unit tests
