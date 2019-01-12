@@ -1,0 +1,3 @@
+
+tests:
+	lua engine.lua

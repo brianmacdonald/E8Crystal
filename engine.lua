@@ -1,4 +1,5 @@
 local object = require "object"
+local tests = require "tests"
 
 function get_object_at(x, y)
 end
@@ -115,42 +116,26 @@ physical_object = {
         gets_hit = gets_hit,
         gets_collided = gets_collided,
         dies = dies
-    }
+    },
+    update = function(self)
+      if is_moving == true then
+         self.x = self.x_delta + self.x_speed
+         self.y = self.y_delta + self.x_speed
+      end
+    end
 }
 
-function test_runner()
-    local tests = {
-        test_new_object = function()
-            assert(object:new("foobar").type == "foobar")
-        end,
-        test_object_draw = function()
-            local has_run = false
-            local animation = function ()
-                has_run = true
-            end
-            local obj = object:new({animations = {animation}})
-            obj:draw()
-            assert(has_run == true)
-        end,
-        test_spawn_object = function()
-            local obj = object:new("foobar")
-            assert(obj.is_alive == false)
-            obj:spawn()
-            assert(obj.is_alive == true)
-            obj:kill()
-            assert(obj.is_alive == false)
-        end,
-        test_kill_object = function()
-            local obj = object:new("foobar")
-            obj.is_alive = true
-            obj:kill()
-            assert(obj.is_alive == false)
-        end,
-    }
-    for k, v in pairs(tests) do
-        v()
-        print(k .. ": " .. "Successful")
+function update()
+    for i, game_object in ipairs(all_game_objects) do
+       game_object.trigger()
     end
 end
 
-test_runner()
+function game_loop()
+    while true do
+        draw()
+        update()
+    end
+end
+
+tests.test_runner()
